@@ -1,0 +1,11 @@
+:host {
+  display: inline-flex;
+  width: var(--icon-size, 24px);
+  height: var(--icon-size, 24px);
+}
+
+img,
+svg {
+  width: 100%;
+  height: 100%;
+}

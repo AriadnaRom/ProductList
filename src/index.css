@@ -1,0 +1,32 @@
+@font-face {
+  font-family: "Red Hat Text";
+  src: url("./assets/fonts/static/RedHatText-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Red Hat Text";
+  src: url("./assets/fonts/static/RedHatText-Bold.ttf") format("truetype");
+  font-weight: 600 700;
+}
+
+:root {
+  font-family: "Red Hat Text", sans-serif;
+  background: #fcf8f5;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-width: 320px;
+  padding: 88px 32px;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 32px 24px;
+  }
+}

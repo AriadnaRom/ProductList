@@ -1,0 +1,62 @@
+
+h1, h2, h3, p {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  color: var(--text-color);
+  font-family: var(--font-family-primary);
+}
+
+.xs {
+  font-size: 0.7rem;
+}
+
+.s {
+  font-size: 0.75rem;
+}
+
+.m {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.ml{
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.l {
+  font-size: 20px;
+}
+
+.xl {
+  font-size: 2rem;
+}
+
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.weight-regular {
+  font-weight: 400;
+}
+
+.weight-medium {
+  font-weight: 500;
+}
+
+.weight-semibold {
+  font-weight: 600;
+}
+
+.weight-bold {
+  font-weight: 700;
+}
