@@ -1,9 +1,10 @@
 import { LitElement, html, css, unsafeCSS } from "lit";
 import "../../components/type-button/type-button.js";
 import "../../components/type-text/type-text.js";
-import "../../components/type-icon/type-icon.js";
+import "../../components/type-picture/type-picture.js";
 
 import styles from "./product-card.scss?inline";
+import cart from "../../assets/images/icon-add-to-cart.svg"
 
 export class ProductCard extends LitElement {
   static styles = css`
@@ -34,18 +35,19 @@ export class ProductCard extends LitElement {
     return html`
       <article class="product-card">
         <div class="image-container">
-          <type-icon .image=${this.image} alt=${this.name}></type-icon>
+          <type-picture .image=${this.image} alt=${this.name}> </type-picture>
+
           <div class="button">
-            <type-button .text=${this.buttonText}></type-button>
+            <type-button .icon=${cart} .text=${this.buttonText}></type-button>
           </div>
         </div>
 
         <div class="product-info">
           <type-text .text=${this.category}></type-text>
 
-          <type-text .text=${this.name} weight="bold"></type-text>
+          <type-text .text=${this.name} weight="bold"> </type-text>
 
-          <type-text .text=${`$${this.price.toFixed(2)}`}></type-text>
+          <type-text .text=${`$${this.price.toFixed(2)}`}> </type-text>
         </div>
       </article>
     `;

@@ -14,12 +14,14 @@ export class MyOnline extends LitElement {
 
   render() {
     return html`
-      <product-list
-      .titleProduct=${es.desserts}
-      .buttonText=${es.cart}
-      >
-
-      </product-list>`;
+      <main class="main-content">
+        <product-list
+          .titleProduct=${es.desserts}
+          .buttonText=${es.cart}
+        ></product-list>
+        <shopping-cart></shopping-cart>
+      </main>
+    `;
   }
 }
 

@@ -2,7 +2,6 @@ import { LitElement, html, css, unsafeCSS } from "lit";
 
 import products from "../../data.json";
 
-
 import "../compositions/type-header/type-header.js";
 import "../compositions/product-card/product-card.js";
 
@@ -27,14 +26,25 @@ export class ProductList extends LitElement {
     this.buttonText = "";
   }
 
+  _getImagePath(path) {
+    if (!path) return "";
+
+    return new URL(path.replace("./", "../"), import.meta.url).href;
+  }
+
+  _getProductImage(image) {
+    return {
+      desktop: this._getImagePath(image.desktop),
+      tablet: this._getImagePath(image.tablet),
+      mobile: this._getImagePath(image.mobile),
+    };
+  }
 
 
-  _getImagePath(image) {
- return new URL(image.replace("./", "../"), import.meta.url).href;
-}
-  render() {
-    return html`
-      <type-header
+  _renderList(){
+return html`
+
+<type-header
         .title=${this.titleProduct}
       ></type-header>
 
@@ -42,7 +52,7 @@ export class ProductList extends LitElement {
         ${this.products.map(
           (product) => html`
             <product-card
-              .image=${product.image}
+              .image=${this._getProductImage(product.image)}
               .name=${product.name}
               .category=${product.category}
               .price=${product.price}
@@ -51,6 +61,15 @@ export class ProductList extends LitElement {
           `,
         )}
       </section>
+`
+
+
+
+
+  }
+  render() {
+    return html`
+      ${this._renderList()}
     `;
   }
 }

@@ -1,7 +1,9 @@
  .products {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 32px 24px;
+      max-width: 1440px;
+        margin: 1.5rem auto 0 auto;
     }
 
     @media (max-width: 900px) {

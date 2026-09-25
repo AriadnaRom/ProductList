@@ -1,4 +1,5 @@
 import { LitElement, html, css, unsafeCSS } from "lit";
+import "../type-icon/type-icon.js"
 
 import styles from "./type-button.scss?inline";
 
