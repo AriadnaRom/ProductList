@@ -1,5 +1,6 @@
 import { LitElement, html, css, unsafeCSS } from "lit";
 import styles from "./cart-item.scss?inline";
+import "../../components/type-icon/type-icon.js"
 import emptyCart from "../../assets/images/illustration-empty-cart.svg";
 
 export class Cart extends LitElement {
@@ -10,12 +11,14 @@ export class Cart extends LitElement {
   static properties = {
     items: { type: Array },
     textcart: { type: String },
+    textaddcart:{type:String}
   };
 
   constructor() {
     super();
     this.items = [];
     this.textcart = "";
+    this.textaddcart="";
   }
 
   render() {
@@ -31,13 +34,19 @@ export class Cart extends LitElement {
     );
 
     return html`
-      <aside class="cart-panel" aria-label="Your cart">
-        <h2>${this.textcart} (${itemCount})</h2>
+      <aside class="cart-panel">
+       <type-text
+       tag="h2"
+        class="cart-title"
+        .text=${`${this.textcart}(${itemCount})`} ></type-text>
+
         ${this.items.length === 0
           ? html`
               <div class="empty-cart">
-                <img src=${emptyCart} alt="" />
-                <p>Your added items will appear here</p>
+                <type-icon src=${emptyCart} 
+                alt="" class="cart-icon">
+              </type-icon>
+                <type-text size="s" .text=${this.textaddcart}></type-text>
               </div>
             `
           : html`

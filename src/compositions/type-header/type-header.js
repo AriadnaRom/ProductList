@@ -26,7 +26,6 @@ export class TypeHeader extends LitElement {
       <div class="header">
         <type-text
           tag="h1"
-          size="l"
           weight="bold"
           text="${this.title}"
           align="left"

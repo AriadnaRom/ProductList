@@ -37,13 +37,17 @@ export class MyOnline extends LitElement {
 
   _addToCart(event) {
     const product = event.detail;
-    const existingItem = this.cart[product.id];
+
+    if (product.quantity <= 0) {
+      const { [product.id]: removedItem, ...remainingItems } = this.cart;
+      this.cart = remainingItems;
+      return;
+    }
 
     this.cart = {
       ...this.cart,
       [product.id]: {
         ...product,
-        quantity: existingItem ? existingItem.quantity + 1 : 1,
       },
     };
   }
@@ -57,16 +61,18 @@ export class MyOnline extends LitElement {
     return html`
       <main
         class="main-content"
-        @add-to-cart=${this._addToCart}
+        @cart-change=${this._addToCart}
         @remove-from-cart=${this._removeFromCart}
       >
         <product-list
           .titleProduct=${es.desserts}
           .buttonText=${es.cart}
         ></product-list>
+        
         <shopping-cart
           .items=${Object.values(this.cart)}
           .textcart=${es.YourCart}
+          .textaddcart=${es.description}
         ></shopping-cart>
       </main>
     `;

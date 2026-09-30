@@ -25,6 +25,33 @@ type-text:first-child {
 type-text:last-child {
   --text-color: var(--color-red);
 }
+.quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 5rem;
+  padding: 5px 15px;
+
+  background-color: var(--color-red);
+  border-radius: 999px;
+}
+
+.quantity-control button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.quantity {
+  color: white;
+  font-weight: 600;
+}
 
 .product-info {
   display: grid;

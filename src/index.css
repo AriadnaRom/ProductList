@@ -24,7 +24,7 @@
   --color-red: hsl(14, 86%, 42%);
   --color-green: hsl(159, 69%, 38%);
 
-  --color-rose-50: hsl(20, 50%, 98%);
+  --color-rose-50:#fcf8f5;
   --color-rose-100: hsl(13, 31%, 94%);
   --color-rose-300: hsl(14, 25%, 72%);
   --color-rose-400: hsl(7, 20%, 60%);
@@ -68,3 +68,4 @@ body {
     padding: 32px 24px;
   }
 }
+

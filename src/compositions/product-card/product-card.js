@@ -1,10 +1,14 @@
 import { LitElement, html, css, unsafeCSS } from "lit";
+
 import "../../components/type-button/type-button.js";
 import "../../components/type-text/type-text.js";
 import "../../components/type-picture/type-picture.js";
 
 import styles from "./product-card.scss?inline";
+
 import cart from "../../assets/images/icon-add-to-cart.svg";
+import iconMinus from "../../assets/images/icon-decrement-quantity.svg";
+import iconPlus from "../../assets/images/icon-increment-quantity.svg";
 
 export class ProductCard extends LitElement {
   static styles = css`
@@ -17,7 +21,7 @@ export class ProductCard extends LitElement {
     name: { type: String },
     price: { type: Number },
     buttonText: { type: String },
-    iconName: { type: String },
+    quantity: { type: Number },
   };
 
   constructor() {
@@ -28,20 +32,39 @@ export class ProductCard extends LitElement {
     this.name = "";
     this.price = 0;
     this.buttonText = "";
-    this.iconName = "";
+    this.quantity = 0;
   }
 
-  _addProduct(event) {
-    event.stopPropagation();
+  _addProduct() {
+    this.quantity = 1;
 
+    this._dispatchCartChange();
+  }
+
+  _decreaseQuantity() {
+    if (this.quantity > 0) {
+      this.quantity -= 1;
+
+      this._dispatchCartChange();
+    }
+  }
+
+  _increaseQuantity() {
+    this.quantity += 1;
+
+    this._dispatchCartChange();
+  }
+
+  _dispatchCartChange() {
     this.dispatchEvent(
-      new CustomEvent("add-to-cart", {
+      new CustomEvent("cart-change", {
         detail: {
           id: this.name,
           name: this.name,
           category: this.category,
           price: this.price,
           image: this.image,
+          quantity: this.quantity,
         },
         bubbles: true,
         composed: true,
@@ -49,35 +72,84 @@ export class ProductCard extends LitElement {
     );
   }
 
+  _renderCartControl() {
+    if (this.quantity === 0) {
+      return html`
+        <type-button
+          .icon=${cart}
+          .text=${this.buttonText}
+          size="m"
+          weight="bold"
+          type="button"
+          @type-button-click=${this._addProduct}
+        ></type-button>
+      `;
+    }
+
+    return html`
+      <div class="quantity-control">
+        <type-button
+          .icon=${iconMinus}
+          variant="icon"
+          type="button"
+          @type-button-click=${this._decreaseQuantity}
+        ></type-button>
+
+        <div class="quantity">
+          ${this.quantity}
+        </div>
+
+        <type-button
+          .icon=${iconPlus}
+          variant="icon"
+          type="button"
+          @type-button-click=${this._increaseQuantity}
+        ></type-button>
+      </div>
+    `;
+  }
+
   _renderCard() {
     return html`
       <article class="product-card">
         <div class="image-container">
-          <type-picture .image=${this.image} alt=${this.name}> </type-picture>
+          <type-picture
+            .image=${this.image}
+            alt=${this.name}
+          ></type-picture>
 
-          <div class="button" >
-            <type-button .icon=${cart} .text=${this.buttonText} @click=${this._addProduct}></type-button>
+          <div class="button">
+            ${this._renderCartControl()}
           </div>
         </div>
 
         <div class="product-info">
-          <type-text size="xs" .text=${this.category}></type-text>
+          <type-text
+            size="m"
+            .text=${this.category}
+          ></type-text>
 
-          <type-text size="s" .text=${this.name} weight="bold"> </type-text>
+          <type-text
+            size="m"
+            .text=${this.name}
+            weight="bold"
+          ></type-text>
 
           <type-text
             class="price"
-            size="s"
+            size="m"
+            weight="semibold"
             .text=${`$${this.price.toFixed(2)}`}
-          >
-          </type-text>
+          ></type-text>
         </div>
       </article>
     `;
   }
 
   render() {
-    return html`${this._renderCard()}`;
+    return html`
+      ${this._renderCard()}
+    `;
   }
 }
 

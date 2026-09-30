@@ -33,6 +33,10 @@ export class TypeButton extends LitElement {
     icon: {
       type: String,
     },
+      weight: {
+    type: String,
+    attribute: "weight",
+  },
   };
 
   constructor() {
@@ -44,6 +48,8 @@ export class TypeButton extends LitElement {
     this.type = "";
     this.selected = false;
     this.icon = "";
+      this.weight = "";
+    
   }
 
   _handleClick() {
@@ -59,6 +65,7 @@ export class TypeButton extends LitElement {
     const className = `
       ${this.size}
       ${this.variant}
+      weight-${this.weight}
       ${this.selected ? "selected" : ""}
     `;
 
@@ -69,7 +76,7 @@ export class TypeButton extends LitElement {
         @click=${this._handleClick}
       >
         ${this.icon
-          ? html`<type-icon src=${this.icon}></type-icon>`
+          ? html`<type-icon .src=${this.icon}></type-icon>`
           : ""}
 
         ${this.text}
