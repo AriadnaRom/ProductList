@@ -1,8 +1,13 @@
-import { LitElement, html } from "lit";
-import { styles } from "./type-header.css.js";
+import {LitElement, html, css, unsafeCSS  } from "lit";
+import styles from "./type-header.scss?inline";
 import "../../components/type-text/type-text.js";
 
 export class TypeHeader extends LitElement {
+
+    static styles = css`
+    ${unsafeCSS(styles)}
+  `;
+
   static properties = {
     title: { type: String },
     subtitle: { type: String },
@@ -14,14 +19,14 @@ export class TypeHeader extends LitElement {
     this.title = "";
   }
 
-  static styles = styles;
+  
 
   _renderContent() {
     return html`
       <div class="header">
         <type-text
           tag="h1"
-          size="sl"
+          size="l"
           weight="bold"
           text="${this.title}"
           align="left"

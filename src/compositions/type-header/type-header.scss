@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 1440px;
+  margin: 0 0 16px;
+  padding: 0;
+}
+
+.subtitle {
+  --text-color: var(--text-secondary);
+}

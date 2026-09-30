@@ -10,10 +10,10 @@
   font-weight: 600 700;
 }
 
-
 :root {
   /* Fonts */
   --font-family: "Red Hat Text", sans-serif;
+  --font-family-primary: var(--font-family);
 
   /* Font Weights */
   --font-regular: 400;
@@ -30,6 +30,8 @@
   --color-rose-400: hsl(7, 20%, 60%);
   --color-rose-500: hsl(12, 20%, 44%);
   --color-rose-900: hsl(14, 65%, 9%);
+  --text-color: var(--color-rose-900);
+  --text-secondary: var(--color-rose-500);
 
   /* Typography */
   --font-size-body: 16px;
@@ -55,21 +57,14 @@
 body {
   margin: 0;
   min-width: 320px;
-  padding: 88px 32px;
+  padding: 50px 7.75%;
   font-family: var(--font-family);
   background: var(--color-rose-50);
-  font-size:16px;
+  font-size: 16px;
 }
 
-.main-content {
-  display: grid;
-  grid-template-columns: 1fr 24rem;
-  gap: 2rem;
-  align-items: start;
-}
-
-@media (max-width: 768px) {
-  .main-content {
-    grid-template-columns: 1fr;
+@media (max-width: 700px) {
+  body {
+    padding: 32px 24px;
   }
 }

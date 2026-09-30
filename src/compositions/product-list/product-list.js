@@ -1,9 +1,9 @@
 import { LitElement, html, css, unsafeCSS } from "lit";
 
-import products from "../../data.json";
+import products from "../../../data.json";
 
-import "../compositions/type-header/type-header.js";
-import "../compositions/product-card/product-card.js";
+import "../type-header/type-header.js";
+import "../product-card/product-card.js";
 
 import styles from "./product-list.scss?inline";
 
@@ -29,7 +29,10 @@ export class ProductList extends LitElement {
   _getImagePath(path) {
     if (!path) return "";
 
-    return new URL(path.replace("./", "../"), import.meta.url).href;
+    return new URL(
+      path.replace("./", "../../"),
+      import.meta.url,
+    ).href;
   }
 
   _getProductImage(image) {
@@ -40,11 +43,9 @@ export class ProductList extends LitElement {
     };
   }
 
-
-  _renderList(){
-return html`
-
-<type-header
+  _renderList() {
+    return html`
+      <type-header
         .title=${this.titleProduct}
       ></type-header>
 
@@ -61,16 +62,11 @@ return html`
           `,
         )}
       </section>
-`
-
-
-
-
-  }
-  render() {
-    return html`
-      ${this._renderList()}
     `;
+  }
+
+  render() {
+    return html`${this._renderList()}`;
   }
 }
 

@@ -1,6 +1,6 @@
 :host {
-      display: block;
-    }
+  display: block;
+}
 .product-card {
   display: flex;
   flex-direction: column;
@@ -8,22 +8,25 @@
 
 .image-container {
   position: relative;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
-
 
 .button {
- position: absolute;
-left: 50%;
-bottom: -20px;
-transform: translateX(-50%);
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  transform: translateX(-50%);
 }
 
+type-text:first-child {
+  --text-color: var(--color-rose-500);
+}
 
-img {
-  display: block;
-  width: 100%;
-  height: 240px;
-  object-fit: cover;
-  border-radius: 12px;
+type-text:last-child {
+  --text-color: var(--color-red);
+}
+
+.product-info {
+  display: grid;
+  gap: 1px;
 }
