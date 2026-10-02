@@ -37,10 +37,17 @@ export class ProductList extends LitElement {
 
   _getProductImage(image) {
     return {
+      thumbnail: this._getImagePath(image.thumbnail),
       desktop: this._getImagePath(image.desktop),
       tablet: this._getImagePath(image.tablet),
       mobile: this._getImagePath(image.mobile),
     };
+  }
+
+  resetQuantities() {
+    this.renderRoot.querySelectorAll("product-card").forEach((card) => {
+      card.resetQuantity();
+    });
   }
 
   _renderList() {

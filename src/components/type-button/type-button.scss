@@ -18,6 +18,19 @@ button {
     color: var(--color-red);
   }
 
+  &.primary {
+    width: 100%;
+    border-color: var(--color-red);
+    background: var(--color-red);
+    color: #fff;
+
+    &:hover {
+      border-color: var(--color-rose-900);
+      background: var(--color-rose-900);
+      color: #fff;
+    }
+  }
+
   type-icon {
     --icon-size: 18px;
   }

@@ -1,38 +1,21 @@
-import { LitElement, css, html } from "lit";
+import { LitElement, html, css, unsafeCSS } from "lit";
 import "./compositions/product-list/product-list.js";
 import "./compositions/cart/cart.js";
 import { es } from "./locales/locale_es.js";
+import styles from "./my-online.scss?inline";
 
 export class MyOnline extends LitElement {
   static styles = css`
-    :host {
-      display: block;
-    }
-
-    .main-content {
-      display: grid;
-      grid-template-columns: minmax(0, 2.08fr) minmax(210px, 1fr);
-      gap: 18px;
-      align-items: start;
-      max-width: 1440px;
-      margin: 0 auto;
-    }
-
-    @media (max-width: 700px) {
-      .main-content {
-        grid-template-columns: 1fr;
-      }
-    }
-  `;
-
+     ${unsafeCSS(styles)}
+   `;
+ 
   static properties = {
     cart: { state: true },
-  };
+  }
 
   constructor() {
     super();
-    this.cart =
-      /** @type {Record<string, { id: string, name: string, category: string, price: number, image: object, quantity: number }>} */ ({});
+    this.cart = {};
   }
 
   _addToCart(event) {
@@ -57,24 +40,31 @@ export class MyOnline extends LitElement {
     this.cart = remainingItems;
   }
 
+
+_rendercontent() {
+return html`
+ <main class="main-content">
+      <product-list
+        .titleProduct=${es.desserts}
+        .buttonText=${es.cart}
+        @cart-change=${this._addToCart}
+      ></product-list>
+
+      <shopping-cart
+        .items=${Object.values(this.cart)}
+        .textcart=${es.YourCart}
+        .textaddcart=${es.description}
+        @remove-from-cart=${this._removeFromCart}
+      ></shopping-cart>
+    </main>
+    `;
+
+}
+
+
   render() {
     return html`
-      <main
-        class="main-content"
-        @cart-change=${this._addToCart}
-        @remove-from-cart=${this._removeFromCart}
-      >
-        <product-list
-          .titleProduct=${es.desserts}
-          .buttonText=${es.cart}
-        ></product-list>
-        
-        <shopping-cart
-          .items=${Object.values(this.cart)}
-          .textcart=${es.YourCart}
-          .textaddcart=${es.description}
-        ></shopping-cart>
-      </main>
+      ${this._rendercontent()}
     `;
   }
 }

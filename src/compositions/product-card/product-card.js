@@ -54,6 +54,11 @@ export class ProductCard extends LitElement {
 
     this._dispatchCartChange();
   }
+  resetQuantity() {
+    if (this.quantity === 0) return;
+    this.quantity = 0;
+    this._dispatchCartChange();
+  }
 
   _dispatchCartChange() {
     this.dispatchEvent(
