@@ -33,9 +33,11 @@ export class Cart extends LitElement {
     this.textconfirm = "";
     this.textcarbon = "";
   }
+//conteo de productos en el carrito
   _getItemCount() {
     return this.items.reduce((total, item) => total + item.quantity, 0);
   }
+  //total de productos en el carrito
   _getTotal() {
     return this.items.reduce(
       (total, item) => total + item.price * item.quantity,
@@ -45,10 +47,12 @@ export class Cart extends LitElement {
 
   _confirmOrder() {
     this.dispatchEvent(
-      new CustomEvent("cart-confirm-order", { bubbles: true, composed: true }),
+      new CustomEvent("cart-confirm-order", { 
+        bubbles: true,
+         composed: true }),
     );
   }
-
+//muestra el carrito de compras vacío
   _renderEmptyCart() {
     return html`
       <div class="empty-cart">
@@ -58,7 +62,7 @@ export class Cart extends LitElement {
       </div>
     `;
   }
-
+//lo que se muestra en el carrito de compras, los productos agregados y sus cantidades
   _renderCartItems() {
     return html`
       <ul>
@@ -108,6 +112,8 @@ export class Cart extends LitElement {
       </ul>
     `;
   }
+
+//muestra el total de la orden en el carrito de compras 
   _renderOrderTotal() {
     const total = this._getTotal();
 
@@ -151,14 +157,17 @@ export class Cart extends LitElement {
         <type-text
           tag="h2"
           class="cart-title"
+           weight="bold"
           .text=${`${this.textcart} (${itemCount})`}
         ></type-text>
 
         ${this.items.length === 0
           ? this._renderEmptyCart()
           : html`
-              ${this._renderCartItems()} ${this._renderOrderTotal()}
+              ${this._renderCartItems()} 
+              ${this._renderOrderTotal()}
               ${this._renderCarbonNotice()}
+              
               <type-button
                 variant="primary"
                 size="m"

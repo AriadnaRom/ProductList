@@ -29,10 +29,7 @@ export class ProductList extends LitElement {
   _getImagePath(path) {
     if (!path) return "";
 
-    return new URL(
-      path.replace("./", "../../"),
-      import.meta.url,
-    ).href;
+    return new URL(path.replace("./", "../../"), import.meta.url).href;
   }
 
   _getProductImage(image) {
@@ -50,11 +47,20 @@ export class ProductList extends LitElement {
     });
   }
 
+  resetProductQuantity(id) {
+    const card = [...this.renderRoot.querySelectorAll("product-card")].find(
+      (productCard) => productCard.name === id,
+    );
+
+    if (!card) return false;
+
+    card.resetQuantity();
+    return true;
+  }
+
   _renderList() {
     return html`
-      <type-header
-        .title=${this.titleProduct}
-      ></type-header>
+      <type-header .title=${this.titleProduct}></type-header>
 
       <section class="products">
         ${this.products.map(

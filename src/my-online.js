@@ -6,12 +6,12 @@ import styles from "./my-online.scss?inline";
 
 export class MyOnline extends LitElement {
   static styles = css`
-     ${unsafeCSS(styles)}
-   `;
- 
+    ${unsafeCSS(styles)}
+  `;
+
   static properties = {
     cart: { state: true },
-  }
+  };
 
   constructor() {
     super();
@@ -36,36 +36,41 @@ export class MyOnline extends LitElement {
   }
 
   _removeFromCart(event) {
-    const { [event.detail.id]: removedItem, ...remainingItems } = this.cart;
-    this.cart = remainingItems;
+    const productList = this.renderRoot.querySelector("product-list");
+    const wasReset = productList?.resetProductQuantity(event.detail.id);
+
+    if (!wasReset) {
+      const { [event.detail.id]: removedItem, ...remainingItems } = this.cart;
+      this.cart = remainingItems;
+    }
   }
 
+  _renderContent() {
+    return html`
+      <main class="main-content">
+        <product-list
+          .titleProduct=${es.desserts}
+          .buttonText=${es.cart}
+          .cart=${this.cart}
+          @cart-change=${this._addToCart}
+        ></product-list>
 
-_rendercontent() {
-return html`
- <main class="main-content">
-      <product-list
-        .titleProduct=${es.desserts}
-        .buttonText=${es.cart}
-        @cart-change=${this._addToCart}
-      ></product-list>
-
-      <shopping-cart
-        .items=${Object.values(this.cart)}
-        .textcart=${es.YourCart}
-        .textaddcart=${es.description}
-        @remove-from-cart=${this._removeFromCart}
-      ></shopping-cart>
-    </main>
+        <shopping-cart
+          .items=${Object.values(this.cart)}
+          .textcart=${es.YourCart}
+          .textaddcart=${es.description}
+          .texttotal=${es.orderTotal}
+          .textremove=${es.textremove}
+          .textconfirm=${es.confirmOrder}
+          .textcarbon=${es.carbonNeutral}
+          @remove-from-cart=${this._removeFromCart}
+        ></shopping-cart>
+      </main>
     `;
-
-}
-
+  }
 
   render() {
-    return html`
-      ${this._rendercontent()}
-    `;
+    return html` ${this._renderContent()} `;
   }
 }
 

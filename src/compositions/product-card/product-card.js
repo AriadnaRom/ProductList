@@ -36,9 +36,10 @@ export class ProductCard extends LitElement {
   }
 
   _addProduct() {
-    this.quantity = 1;
 
-    this._dispatchCartChange();
+this.quantity = 1;
+this._dispatchCartChange();
+    
   }
 
   _decreaseQuantity() {
